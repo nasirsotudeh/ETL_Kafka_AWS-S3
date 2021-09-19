@@ -1,0 +1,15 @@
+CREATE SOURCE CONNECTOR sink-s3-voluble  WITH (
+  'connector.class' = 'io.mdrogalis.voluble.VolubleSourceConnector',
+
+  'genkp.owners.with' = '#{Internet.uuid}',
+  'genv.owners.name.with' = '#{Name.full_name}',
+  'genv.owners.creditCardNumber.with' = '#{Finance.credit_card}',
+
+  'genk.adopters.name.sometimes.with' = '#{Name.full_name}',
+  'genk.adopters.name.sometimes.matching' = 'adopters.key.name',
+  'genv.adopters.jobTitle.with' = '#{Job.title}',
+  'attrk.adopters.name.matching.rate' = '0.05',
+  'topic.adopters.tombstone.rate' = '0.10',
+  'global.throttle.ms' = '5000',
+  'global.history.records.max' = '100'
+);
