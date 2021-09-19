@@ -90,17 +90,18 @@ ______
 status 
 
 # get staus all connectors
-
+```
 curl -s "http://localhost:8083/connectors"|   jq '.[]'|   xargs -I{connector_name} curl -s "http://localhost:8083/connectors/"{connector_name}"/status"|   jq -c -M '[.name,.connector.state,.tasks[].state]|join(":|:")'|   column -s : -t| sed 's/\"//g'| sort
-
+```
 
 
 
 # get status each connector with name
+```
 curl -s -X GET http://localhost:8083/connectors/{connector_name}/status
 ex :
 curl -s -X GET http://localhost:8083/connectors/s3_sink_lson/status
-
+```
 
 
 # get tasks each connector with name
